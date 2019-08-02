@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Smart by Syed Wakil';
-  summary = " This is a smart Application and covers most of the Angular 8 topics"
+  title = 'Ng-UI Map by Syed Wakil';
+  summary = " This is a NG-UI  Map Application"
   
 }
