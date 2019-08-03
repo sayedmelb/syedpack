@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-1"></div>
     <div class="col-10">
-      <h1>
-        Welcome to {{ title }}!
+      <h1 class="header">
+        Carla's Cattle
       </h1>
     </div>
     <div class="col-1"></div>
@@ -14,7 +14,24 @@
     <div class="col-1"></div>
     <div class="col-1"></div>
     <div class="col-10">
-      <h2 class="header">Carla’s Cattle</h2>
+      
+       <div><h3>Legends</h3></div>
+       <div>Cattles well trained with eSpepard: <img class="custom-icon" src='./assets/images/green.png' /></div>
+        <div>Cattles new to eSpepard Program: <img class="custom-icon" src='./assets/images/violet.png' /></div>
+        <div>Cattles close to virtual fencing: <img class="custom-icon" src='./assets/images/warning.png' /></div>
+        <div>Cattles outside virtual fencing: <img class="custom-icon" src='./assets/images/danger.png' /></div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div>The polygon on the map is indicating the virtual fencing.</div>
+      <input
+      class="mapSearch"
+      placeholder="Filter by cattle, status, desc.."
+      autocomplete="off"
+      (keyup)="updateFilter($event)"
+    />&nbsp;
+    <button type="button" class="btn btn-primary btn-gap" (click)="clearFilter()">Clear filter</button>
       <ngui-map class="margin-top mapsize" zoom="12.5" center="Thornton
               Queensland , Australia" [fullscreenControl]="true" [fullscreenControlOptions]="{position: 'TOP_RIGHT'}">
 

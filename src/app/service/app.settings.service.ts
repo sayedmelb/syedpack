@@ -14,7 +14,7 @@ import { CattleData } from '../model/cattle.data';
     url = './assets/data.json';
      constructor(private http: HttpClient) {
           this.getJSON().subscribe(data => {
-              console.log(data);
+              
           });
       }
   
