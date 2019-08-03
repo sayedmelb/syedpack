@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
 
   
   onHover(event, data) {
-    this.statusMessage = "Cattle id : " + "<b>" + data.id + "</b><br>" + " Status: " + data.desc;
+    this.statusMessage = "Cattle id : " + "<b>" + data.id + "</b><br>" + " Comment: " + data.desc + "<br>"+ "Status: " + "<img height='20px' src='" +data.icon+"' class='custom-icon'/>" ;
     this.nguiMapComponent.openInfoWindow('iw',
       data.customMarker
     );

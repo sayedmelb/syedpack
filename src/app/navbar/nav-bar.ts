@@ -20,8 +20,18 @@ export class NavBar implements OnInit {
   ngOnInit() {
   }
 
-  setHome(navitem: string){
-     this.navstatus.emit({state: navitem});
+  setHome(event, navitem: string){
+     
+
+     let evn = event;
+  let styleclass: string = "active";
+  const btnNor = document.getElementsByClassName(
+    styleclass
+  ) as HTMLCollectionOf<HTMLElement>;
+  btnNor[0].classList.remove(styleclass);
+  evn.currentTarget.classList.add(styleclass);
+  this.navstatus.emit({state: navitem});
+
   }
  
 
