@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { AppComponent, AppSettingsService } from './app.component';
 import { NguiMapModule} from '@ngui/map';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBZ2YOJ8KI5qZERdDJVumciKredgdKRU5Q&components=country:AU&libraries=places'})
   ],
-  providers: [],
+  providers: [AppSettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
