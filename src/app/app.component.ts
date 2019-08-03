@@ -1,24 +1,43 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
 import * as data from './data/data.json';
+//import * from '../app/data/data.json'
 import { NguiMapComponent } from '@ngui/map';
 //import { NguiMapComponent } from '../../node_modules/@ngui/map'; //"../../ ../../../node_modules/@ngui/map";
 
-const mapData = data.default;
+const mapData = data;
+
+@Injectable()
+export class AppSettingsService {
+
+   constructor(private http: HttpClient) {
+        this.getJSON().subscribe(data => {
+            console.log(data);
+        });
+    }
+
+    public getJSON(): Observable<any> {
+        return this.http.get("./assets/data.json");
+    }
+}
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [AppSettingsService]
 })
 export class AppComponent implements OnInit {
   //@ViewChild("iw") iw;
-  @ViewChild(NguiMapComponent) nguiMapComponent: NguiMapComponent; 
+  //@ViewChild(NguiMapComponent) nguiMapComponent: NguiMapComponent; 
   //@ViewChild(NguiMapComponent) nguiMapComponent: NguiMapComponent;
   //@ViewChild(NguiMapComponent) nguiMapComponent: NguiMapComponent;
   title = 'Ng-UI Map by Syed Wakil';
   summary = " This is a NG-UI  Map Application"
   public positions = [];
-  imgpath: string = 'assets/images/';
+  imgpath: string = './assets/images/';
 map: any;
 
 paths = [[
@@ -33,19 +52,18 @@ pos = {lat: 1, lng: 2};
 
 
 
-  constructor() {
+  constructor(private appSettingsService : AppSettingsService ) {
     //this.positions = this.getMarkers();
    
   }
 
   ngOnInit() {
 
+    this.appSettingsService.getJSON().subscribe(data => {
 
-    //console.log("data", mapData);
-
-    //console.log("data", this.positions);
-    this.positions = this.normalizeData();
-    console.log("data", this.positions);
+      this.positions = this.normalizeData(data);
+      //console.log("this data",data);
+  });
     
   }
 
@@ -61,7 +79,9 @@ pos = {lat: 1, lng: 2};
     this.map = map;
   }
 
-  normalizeData(){
+  normalizeData(mapData: any){
+
+    
 
     let positions = [];
     let lat: number, lng: number, icon: string, status: number =0;
@@ -90,7 +110,7 @@ pos = {lat: 1, lng: 2};
   }
 
   clicked(event, data){
-    console.log('this.nguiMapComponent', this.nguiMapComponent);
+    //console.log('this.nguiMapComponent', this.nguiMapComponent);
     // this.pos = {
     //   lat: this.customMarker.position.lat(), 
     //   lng: this.customMarker.position.lng()
