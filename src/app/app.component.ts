@@ -5,7 +5,8 @@ import { CattleData } from './model/cattle.data';
 import * as _ from 'lodash';
 import { NguiMapComponent } from '@ngui/map';
 import { AppSettingsService } from './service/app.settings.service';
-
+// For MDB Angular Free
+import { NavbarModule, WavesModule } from 'angular-bootstrap-md'
 
 
 @Component({
@@ -17,13 +18,14 @@ import { AppSettingsService } from './service/app.settings.service';
 export class AppComponent implements OnInit {
   @ViewChild("iw", { static: false }) iw;
   @ViewChild(NguiMapComponent, { static: false }) nguiMapComponent: NguiMapComponent;
-  title: string = 'Ng-UI Map by Syed Wakil';
+  
   summary: string = "This is a NG-UI  Map Application that shows the current location of cattles of Carla's cattle farm. "
 
   public positions = [];
   imgpath: string = './assets/images/';
   statusMessage: string = "";
   map: any;
+  navtoggle: string ="home";
 
   paths = [[
     { lat: -27.75980769, lng: 152.4 },
@@ -143,6 +145,18 @@ export class AppComponent implements OnInit {
     this.getData();
     console.log("this.positions", this.positions);
   }
+
+  OnNavBarClicked(event) {
+    //alert(event);
+    console.log(event);
+    if(event.state=='home'){
+      this.navtoggle='home';
+    } else if(event.state=='listing') {
+      this.navtoggle='listing';
+
+  }
+
+}
 
 
 
