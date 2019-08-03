@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
   @ViewChild("iw", { static: false }) iw;
   @ViewChild(NguiMapComponent, { static: false }) nguiMapComponent: NguiMapComponent;
   title: string = 'Ng-UI Map by Syed Wakil';
-  summary: string = " This is a NG-UI  Map Application"
+  summary: string = "This is a NG-UI  Map Application that shows the current location of cattles of Carla's cattle farm. "
+
   public positions = [];
   imgpath: string = './assets/images/';
   statusMessage: string = "";
@@ -113,6 +114,35 @@ export class AppComponent implements OnInit {
   // }
 
 
+  private getAllValues(object: object) {
+    let values = []
+    for (let key of Object.keys(object)) {
+      if (typeof object[key] !== 'object') values.push(object[key]);
+      else values = [...values, ...this.getAllValues(object[key])]
+    }
+    return values;
+  }
+
+  private updateFilter(event) {
+    if (this.positions.length < 1)  this.getData();
+    let temp;
+    temp = [...this.positions];
+    temp = temp.map(({ customMarker, ...item }) => item);
+    const val = event ? event.target.value.toLowerCase() : "";
+    let _th = this;
+    this.positions = temp.filter(function(d) {
+      return (
+        JSON.stringify(_th.getAllValues(d))
+          .toLowerCase()
+          .indexOf(val) !== -1 || !val
+      );
+    });
+  }
+
+  clearFilter(){
+    this.getData();
+    console.log("this.positions", this.positions);
+  }
 
 
 
