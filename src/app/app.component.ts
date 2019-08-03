@@ -9,9 +9,15 @@ import { NguiMapComponent } from '@ngui/map';
 
 //const mapData = data;
 
-@Injectable()
-export class AppSettingsService {
+@Injectable({
+  
+  providedIn: 'root'
 
+})
+
+
+export class AppSettingsService {
+  url = './assets/data.json';
    constructor(private http: HttpClient) {
         this.getJSON().subscribe(data => {
             console.log(data);
@@ -19,7 +25,7 @@ export class AppSettingsService {
     }
 
     public getJSON(): Observable<CattleData[]> {
-        return this.http.get<CattleData[]>("./assets/data.json");
+        return this.http.get<CattleData[]>(this.url);
     }
 }
 
