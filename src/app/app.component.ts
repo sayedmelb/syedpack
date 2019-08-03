@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import * as data from './data/data.json';
+import { CattleData } from './model/cattle.data';
+//import * as data from './data/data.json';
 //import * from '../app/data/data.json'
 import { NguiMapComponent } from '@ngui/map';
 //import { NguiMapComponent } from '../../node_modules/@ngui/map'; //"../../ ../../../node_modules/@ngui/map";
 
-const mapData = data;
+//const mapData = data;
 
 @Injectable()
 export class AppSettingsService {
@@ -17,8 +18,8 @@ export class AppSettingsService {
         });
     }
 
-    public getJSON(): Observable<any> {
-        return this.http.get("./assets/data.json");
+    public getJSON(): Observable<CattleData[]> {
+        return this.http.get<CattleData[]>("./assets/data.json");
     }
 }
 
@@ -69,7 +70,7 @@ pos = {lat: 1, lng: 2};
 
   
 
-  private onCustomMarkerInit(customMarker, markerPoint) {
+   onCustomMarkerInit(customMarker, markerPoint) {
     console.log("customMarker markerPoint", customMarker, markerPoint );
     markerPoint.customMarker = customMarker;
   }
