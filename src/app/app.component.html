@@ -1,10 +1,15 @@
+<nav-bar (navstatus)="OnNavBarClicked($event)"></nav-bar>
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="navtoggle=='home' ">
     <div class="col-1"></div>
     <div class="col-10">
       <h1 class="header">
         Carla's Cattle
       </h1>
+
+
+
+
     </div>
     <div class="col-1"></div>
     <div class="col-1"></div>
@@ -14,24 +19,22 @@
     <div class="col-1"></div>
     <div class="col-1"></div>
     <div class="col-10">
-      
-       <div><h3>Legends</h3></div>
-       <div>Cattles well trained with eSpepard: <img class="custom-icon" src='./assets/images/green.png' /></div>
-        <div>Cattles new to eSpepard Program: <img class="custom-icon" src='./assets/images/violet.png' /></div>
-        <div>Cattles close to virtual fencing: <img class="custom-icon" src='./assets/images/warning.png' /></div>
-        <div>Cattles outside virtual fencing: <img class="custom-icon" src='./assets/images/danger.png' /></div>
+
+      <div>
+        <h3>Legends</h3>
+      </div>
+      <div>Cattles well trained with eSpepard: <img class="custom-icon" src='./assets/images/green.png' /></div>
+      <div>Cattles new to eSpepard Program: <img class="custom-icon" src='./assets/images/violet.png' /></div>
+      <div>Cattles close to virtual fencing: <img class="custom-icon" src='./assets/images/warning.png' /></div>
+      <div>Cattles outside virtual fencing: <img class="custom-icon" src='./assets/images/danger.png' /></div>
     </div>
     <div class="col-1"></div>
     <div class="col-1"></div>
     <div class="col-10">
       <div>The polygon on the map is indicating the virtual fencing.</div>
-      <input
-      class="mapSearch"
-      placeholder="Filter by cattle, status, desc.."
-      autocomplete="off"
-      (keyup)="updateFilter($event)"
-    />&nbsp;
-    <button type="button" class="btn btn-primary btn-gap" (click)="clearFilter()">Clear filter</button>
+      <input class="mapSearch" placeholder="Filter by cattle, status, desc.." autocomplete="off"
+        (keyup)="updateFilter($event)" />&nbsp;
+      <button type="button" class="btn btn-primary btn-gap" (click)="clearFilter()">Clear filter</button>
       <ngui-map class="margin-top mapsize" zoom="12.5" center="Thornton
               Queensland , Australia" [fullscreenControl]="true" [fullscreenControlOptions]="{position: 'TOP_RIGHT'}">
 
@@ -54,4 +57,32 @@
     </div>
     <div class="col-1"></div>
   </div>
+  <!-- <div class="row" *ngIf="navtoggle=='listing'">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Record Label</th>
+          <th>Band</th>
+          <th>Festival</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of positions">
+          <td> {{record.id}}</td>
+          <td>{{record.lat}}</td>
+          <td>{{record.lng}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div> -->
+  <cattle-listing *ngIf="navtoggle=='listing'" [listing]="positions"></cattle-listing>
+
+
 </div>
+<div style="height:1rem;">
+  &nbsp;
+</div>
+<nav-footer></nav-footer>
