@@ -9,7 +9,7 @@
     {"lat": -27.78349729, "lng": 152.40051808, "status": 0, "description": "cattle in safe zone", "id": 1008},
     {"lat": -27.83390705, "lng": 152.33126236, "status": 0, "description": "cattle in safe zone", "id": 1009},
     {"lat": -27.79122486, "lng": 152.32855485, "status": 2, "description": "cattle is close to virtual fencing", "id": 1010},
-    {"lat": -27.82387265, "lng": 152.41888556, "status": 0, "description": "cattle in safe zone", "id": 2001},
+    {"lat": -27.82387265, "lng": 152.41888556, "status": 2, "description": "cattle close to virtual fencing", "id": 2001},
     {"lat": -27.7836311, "lng": 152.36711197, "status": 1, "description": "cattle in safe zone", "id": 2002},
     {"lat": -27.78356536, "lng": 152.33872389, "status": 2, "description": "cattle is close to virtual fencing", "id": 2345},
     {"lat": -27.84247254, "lng": 152.40761768, "status": 0, "description": "cattle in safe zone", "id": 3456},
