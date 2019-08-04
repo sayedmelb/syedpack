@@ -27,6 +27,9 @@ export class AppComponent implements OnInit {
   map: any;
   navtoggle: string ="home";
 
+  errorStatus = false;
+  errorMessage = "";
+
   paths = [[
     { lat: -27.75980769, lng: 152.4 },
     { lat: -27.78980769, lng: 152.33 },
@@ -50,7 +53,15 @@ export class AppComponent implements OnInit {
   getData(){
     this.appSettingsService.getJSON().subscribe(data => {
       this.positions = this.normalizeData(data);
-    });
+    },
+      err => {
+        console.log("http error", err);
+        this.errorStatus = true;
+        this.errorMessage = err.message;
+      
+      }
+    
+    );
 
   }
 
