@@ -22,9 +22,13 @@ import { CattleListing } from './cattle-listing/cattle-listing';
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBZ2YOJ8KI5qZERdDJVumciKredgdKRU5Q&components=country:AU&libraries=places'})
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyAzY5AegOVAdxw1zuTpZQKpI-XS6KJSK3A&components=country:AU&libraries=places'})
   ],
   providers: [AppSettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+//NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBZ2YOJ8KI5qZERdDJVumciKredgdKRU5Q&components=country:AU&libraries=places'})
+  
