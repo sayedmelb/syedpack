@@ -3,52 +3,164 @@
 
   <ng-container *ngIf="navtoggle=='home' ">
     <h1 class="header">
-      Carla's Cattle
+      Vending Machine
     </h1>
     <p>
       {{summary}}
     </p>
+    <img class="img-align" src='./assets/images/vendingmc.png'/>
 
     <div class="row light-shade">
 
       <div class="col-12">
-        <h3>Legends</h3>
+        <h3>Details</h3>
       </div>
 
-      <div class="col-3 ">Cattles well trained with eSpepard: </div>
+      <div class="col-3 ">Machines having 80 percent and above stock: </div>
       <div class="col-1 "> <img class="custom-icon" src='./assets/images/green.png' />
       </div>
       <div class="col-2  "></div>
-      <div class="col-3 ">Cattles new to eSpepard Program:</div>
+      <div class="col-3 ">Machines having 60 - 80 percent stock:</div>
       <div class="col-1  "> <img class="custom-icon" src='./assets/images/violet.png' /> </div>
       <div class="col-2  "></div>
 
 
       <div class="col-12">&nbsp;</div>
 
-      <div class="col-3 ">Cattles close to virtual fencing: </div>
+      <div class="col-3 ">Machhines having 20 - 40 percent stock: </div>
       <div class="col-1 "> <img class="custom-icon" src='./assets/images/warning.png' />
       </div>
       <div class="col-2  "></div>
-      <div class="col-3 ">Cattles outside virtual fencing:</div>
+      <div class="col-3 ">Machines having below 20 percent stock:</div>
       <div class="col-1  "> <img class="custom-icon" src='./assets/images/danger.png' /> </div>
       <div class="col-2  "></div>
 
       <div class="col-12">&nbsp;</div>
-      <div class="col-12">The polygon on the map is indicating the virtual fencing.</div>
+      <div class="col-12">The polygon on the map is indicating a  Mall area in google Map.</div>
       <div class="col-12" style="background-color: orange;" *ngIf="errorStatus">
         <h3>Important Message</h3>
         <p>
           <b>The site is experiencing following Problem<br>: {{errorMessage}}</b>
         </p>
       </div>
+      <div class="col-12 machine-section"  >
+        <h3>Vending Machine Section</h3>
+        <div class="row">
+          <div class="col-12  " *ngIf="!paymentSelected">
+            <div class="info-container">
+              Use either the Cash or card section below to topup and use the vending machine
+            </div>
+            <div class="row">
+              <div class="col-6"><button class="btn-primary pad-right" (click)="onPaymentModeSelection('cash') ">Cash payment</button><button class="btn-success" (click)="onPaymentModeSelection('card') ">Card payment</button></div>
+              <div class="col-6"></div>
+            </div>
+          </div>
+          <div class="col-12 " *ngIf="cashPayment">
+            <div class=" row info-container-cash">
+              <div class="col-12">
+                <h4>Cash Section</h4>
+                <div class="row light-border-top">
+                  <div class="col-3 " (click)="addToBalance($event,0.05)"><div class="dv-button">5c</div></div>
+                  <div class="col-3 " (click)="addToBalance($event,0.10)"><div class="dv-button">10c</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,0.20)"><div class="dv-button">20c</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,0.50)"><div class="dv-button">50c</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,1.00)"><div class="dv-button">$1</div>  </div>
+                  <div class="col-3 " (click)="addToBalance($event,2.00)"><div class="dv-button">$2</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,5.00)"><div class="dv-button">$5</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,10.00)"><div class="dv-button">$10</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,20.00)"><div class="dv-button">$20</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,50.00)"><div class="dv-button">$50</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,100.00)"><div class="dv-button">$100</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,200.00)"><div class="dv-button">$200</div> </div>
+                  <div class="col-3 " (click)="addToBalance($event,500.00)"><div class="dv-button">$500</div> </div>
+                  <div class="col-6 "><div class="dv-amount">Amount {{ balanceAmount |  currency:'USD':true:'2.2-4'}}</div> </div>
+                  <div class="col-3"><button class="btn-success" (click)="onDone()">Done</button></div>
+                 <div class="col-12 info-message" *ngIf="fundAvailable">Making your cash available to machine wait...  </div>
+                 <div class="col-12 info-message-success" *ngIf="fundAvailablesuccess">All Good , start selecting your item </div>
+                </div>
+              </div>
+              
+            </div>
+          
+          </div>
+          <div class="col-12"  *ngIf="cardPayment">
+            <div class=" row info-container-card">
+              <div class="col-12">
+                <h4>Card Section</h4>
+                <div class="row light-border-top" >
+                 
+                   <div *ngFor="let item of items; let i = index" class="col-3 " (click)="addToBalanceCard($event,i)" ><div class="dv-button btn-success">{{i}}</div></div>
+                   <div class="col-3 " (click)="addToBalanceCard($event,'.')"><div class="dv-button">.</div></div>
+                   <div class="col-3  "  (click)="onClear($event,'clear')"><div class="dv-button dv-raised btn-warning">Clear</div></div>
+                  
+                   <div class="col-6"><div class="dv-amount">Amount: {{ balanceCardAmountstr |  currency:'USD':true:'2.2-4' }}</div></div>
+                  <div class="col-6 "   ><div class="dv-button dv-raised btn-primary" (click)="onAuthorise()">Authorise</div></div>
+                  <div class="col-12 info-message pl-2 pr-2" *ngIf="authorising"> authorising wait .... </div>
+                  <div class="col-12 info-message-success pl-2 pr-2" *ngIf="approved"> Approved </div>
+                  
+                </div>
+              </div>
+             
+            </div>
+           
+          </div>
+          <div class="col-12" *ngIf="!showVendingMc">
+            <div class="row pr-2 pl-2">
+              <div class="col-12  info-message">
+                <h4>Select Vending machine from map below of Mall to start</h4>
+              </div>
+            </div>
+           
+          </div>
+          <div class="col-12 pd-2" *ngIf="showVendingMc">
+            <h4>Vending Machine No: {{vendData.id}}</h4>
+            <!-- <img class="img-align" src='./assets/images/vendingmc.png'/> -->
+            <div class="row">
+              <div class="col-12"  >
+                <!-- <img class="img-align" src='./assets/images/vendingmc.png'/> -->
+              <div class="row info-machine ">
+                <div class="col-12" *ngFor="let item of vendData.products">
+                  <img height="30px" class="icon-product" [ngClass]="{'coke': item.icon==='coke.jpeg', 'diet': item.icon==='diet.jpeg', 'fanta': item.icon==='fanta.jpeg', 'pepsi': item.icon==='pepsi.jpeg'  }" *ngFor="let cnt of item.productItems; " src="./assets/images/{{item.icon}}" />
+                </div>
+                <!-- <div class="col-12">pepsi</div>
+                <div class="col-12">pepsi</div> -->
+              </div>
+              </div>
+              <div class="col-6 ">
+                <div class="row info-container-cash">
+                  <div *ngFor="let item of vendData.products; let i = index" class="col-12 pb-2 pt-1" (mouseenter)="onHoverProduct($event,item)" (click)="calculateAndDispense($event,item,i)" ><button class="btn btn-primary">{{item.name }}[ {{item.quantity}} ]</button></div>
+                  
+                  <div class="col-12 light-border-top">Size :  {{itemSize}}</div>
+                  <div class="col-12">Prize : $ {{itemPrice}}</div>
+                </div>
+         
+              </div>
+              <div class="col-6 ">
+                <div class="row info-container-cash" style="min-height: 100px;">
+                  <div class="col-12 dv-amount-fund">  Available Fund : {{this.totalAvailableFund |  currency:'USD':true:'2.2-4'}}</div>
+                
+                  <div class="col-12"><button class="btn btn-primary" (click)="onComplete()">Return balance amount and end process</button> </div>
+                  <div class="col-12 info-message" *ngIf="dispensing" >Dispensing please wait ...</div>
+                  <div class="col-12 info-message-success" *ngIf="returnFundCard" >Returning {{this.totalAvailableFund |  currency:'USD':true:'2.2-4'}} fund to card ...</div>
+                  <div class="col-12 info-message-success" *ngIf="returnFundCash" >Collect {{this.totalAvailableFund |  currency:'USD':true:'2.2-4'}} from machine coin/cash area ...</div>
+                </div>
+                
+               
+              </div>
+            </div>
+
+          </div>
+
+        
+        </div>
+      </div>
     </div>
 
     <div class="row map-shade">
       <div class="col-12">
-        <input class="mapSearch" placeholder="Filter by cattle, status, desc.." autocomplete="off"
+        <input class="mapSearch" placeholder="Filter by machine, status, desc.." autocomplete="off"
           (keyup)="updateFilter($event)" />&nbsp;
-        <button type="button" class="btn btn-primary btn-gap" (click)="clearFilter()">Clear filter</button>
+        <button type="button" class="btn btn-primary btn-gap" (click)="clearFilter($event)">Clear filter</button>
       </div>
       <div class="col-12">&nbsp;</div>
       <div class="col-12">

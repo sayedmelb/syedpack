@@ -22,17 +22,17 @@ describe('AppComponent', () => {
   //   expect(app).toBeTruthy();
   // });
 
-  // it(`should have as title 'energy'`, () => {
+  // it(`should have as title 'vending'`, () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual('energy');
+  //   expect(app.title).toEqual('vending');
   // });
 
   // it('should render title in a h1 tag', () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   fixture.detectChanges();
   //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('h1').textContent).toContain("Carla's Cattle");
+  //   expect(compiled.querySelector('h1').textContent).toContain("CVending Machine");
   // });
   // it('should render title in a h3 tag', () => {
   //   const fixture = TestBed.createComponent(AppComponent);

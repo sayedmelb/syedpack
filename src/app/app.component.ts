@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
+import { Component, OnInit, ViewChild, Injectable, AfterViewInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { CattleData } from './model/cattle.data';
 import * as _ from 'lodash';
 import { NguiMapComponent } from '@ngui/map';
 import { AppSettingsService } from './service/app.settings.service';
-// For MDB Angular Free
+
 import { NavbarModule, WavesModule } from 'angular-bootstrap-md'
 
 
@@ -15,17 +15,39 @@ import { NavbarModule, WavesModule } from 'angular-bootstrap-md'
   styleUrls: ['./app.component.scss'],
   providers: [AppSettingsService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild("iw", { static: false }) iw;
   @ViewChild(NguiMapComponent, { static: false }) nguiMapComponent: NguiMapComponent;
-  
-  summary: string = "This is a NG-UI  Map Application that shows the current location of cattles of Carla's cattle farm. "
+
+  summary: string = "This is a Vending Machine Application with the following update below"
+  balanceAmount: number = 0;
+  balanceCardAmountstr: string = '';
+  balanceCardAmount: number = 0;
+  descimalPressed = false;
+  showVendingMc: boolean = false;
+  vendData: any = {};
+  totalAvailableFund = 0.0;
+  itemPrice = 0.0;
+  itemSize = '';
+  dispensing: boolean = false;
+  paymentSelected: boolean = true;
+  cashPayment: boolean = false;
+  cardPayment: boolean = false;
+  returnFundCard: boolean = false;
+  returnFundCash: boolean = false;
+  authorising: boolean = false;
+  approved: boolean = false;
+  fundAvailable: boolean = false;
+  fundAvailablesuccess: boolean = false;
 
   public positions = [];
   imgpath: string = './assets/images/';
   statusMessage: string = "";
   map: any;
-  navtoggle: string ="home";
+  navtoggle: string = "home";
+  // items: [0,1,2,3,4,5,6,7,8,9];
+  items = Array(10).fill(0, 9).map((x, i) => i);
+  productItems = [];
 
   errorStatus = false;
   errorMessage = "";
@@ -43,24 +65,32 @@ export class AppComponent implements OnInit {
 
 
   constructor(private appSettingsService: AppSettingsService) {
-  
+
   }
 
   ngOnInit() {
     this.getData();
+
+  }
+  ngAfterViewInit() {
+    this.vendData = this.positions[0];
+    console.log('this.vendData', this.vendData);
   }
 
-  getData(){
+  getData() {
     this.appSettingsService.getJSON().subscribe(data => {
       this.positions = this.normalizeData(data);
+      this.vendData = this.positions[0];
+     
+
     },
       err => {
         console.log("http error", err);
         this.errorStatus = true;
         this.errorMessage = err.message;
-      
+
       }
-    
+
     );
 
   }
@@ -81,9 +111,9 @@ export class AppComponent implements OnInit {
 
 
     let positions = [];
-    let lat: number, lng: number, icon: string, status: number = 0;
+    let lat: number, lng: number, icon: string, status: number = 0, products: [];
     let newObj;
-    
+
     _.forEach(mapData, mapdata => {
 
       lat = mapdata.lat;
@@ -103,7 +133,8 @@ export class AppComponent implements OnInit {
         icon: icon,
         status: status,
         desc: mapdata.description,
-        id: mapdata.id
+        id: mapdata.id,
+        products: mapdata.products
       }
       positions.push(newObj);
 
@@ -113,18 +144,16 @@ export class AppComponent implements OnInit {
 
   }
 
-  
+
   onHover(event, data) {
-    this.statusMessage = "Cattle id : " + "<b>" + data.id + "</b><br>" + " Comment: " + data.desc + "<br>"+ "Status: " + "<img height='20px' src='" +data.icon+"' class='custom-icon'/>" ;
+    this.statusMessage = "Machine id : " + "<b>" + data.id + "</b><br>" + " Comment: " + data.desc + "<br>" + "Status: " + "<img height='20px' src='" + data.icon + "' class='custom-icon'/>";
     this.nguiMapComponent.openInfoWindow('iw',
       data.customMarker
     );
 
   }
 
-  //  onHoverOut() {
-  //    this.nguiMapComponent.closeInfoWindow("iw");
-  // }
+  
 
 
   private getAllValues(object: object) {
@@ -137,13 +166,13 @@ export class AppComponent implements OnInit {
   }
 
   private updateFilter(event) {
-    if (this.positions.length < 1)  this.getData();
+    if (this.positions.length < 1) this.getData();
     let temp;
     temp = [...this.positions];
     temp = temp.map(({ customMarker, ...item }) => item);
     const val = event ? event.target.value.toLowerCase() : "";
     let _th = this;
-    this.positions = temp.filter(function(d) {
+    this.positions = temp.filter(function (d) {
       return (
         JSON.stringify(_th.getAllValues(d))
           .toLowerCase()
@@ -152,7 +181,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  clearFilter(){
+  clearFilter() {
     this.getData();
     console.log("this.positions", this.positions);
   }
@@ -160,15 +189,183 @@ export class AppComponent implements OnInit {
   OnNavBarClicked(event) {
     //alert(event);
     console.log(event);
-    if(event.state=='home'){
-      this.navtoggle='home';
-    } else if(event.state=='listing') {
-      this.navtoggle='listing';
+    if (event.state == 'home') {
+      this.navtoggle = 'home';
+    } else if (event.state == 'listing') {
+      this.navtoggle = 'listing';
+
+    }
+
 
   }
 
-}
+  clicked(event, data) {
+    console.log(data);
+    this.showVendingMc = true;
+    this.vendData = data;
+    for(let i = 0; i< this.vendData.products.length; i++) {
+      console.log("yesy");
+       this.productItems = Array(this.vendData.products[i].quantity).fill(0, 9).map((x, i) => i);
+       this.vendData.products[i].productItems=this.productItems;
+    }
+    console.log(' this.vendData',  this.vendData);
 
+    
+    this.paymentSelected = false;
+
+  }
+
+  addToBalance(event, value) {
+
+    this.balanceAmount = this.balanceAmount + value;
+   
+  }
+
+  onDone() {
+
+    this.fundAvailable = true;
+    setTimeout(() => {
+      this.fundAvailable = false;
+
+      this.fundAvailablesuccess = true;
+      setTimeout(() => {
+        this.fundAvailablesuccess = false;
+      }, 2000);
+
+      this.totalAvailableFund = this.totalAvailableFund + this.balanceAmount;
+      this.balanceAmount = 0;
+    }, 2000);
+
+
+
+  }
+
+  addToBalanceCard(event, value) {
+    if (value === '.') {
+      if (!this.balanceCardAmountstr.includes('.')) {
+        this.balanceCardAmountstr = this.balanceCardAmountstr + value;
+      }
+
+    } else {
+      this.balanceCardAmountstr = this.balanceCardAmountstr + value;
+    }
+
+  }
+
+  onClear(event, value) {
+    this.balanceCardAmountstr = '';
+    this.descimalPressed = false;
+  }
+  calculateAndDispense(event, item) {
+    this.balanceAmount = 0;
+
+    if (item.quantity === 0) {
+      alert('Stock for this item is no more available in this machine Sorry');
+    } else {
+      if (this.totalAvailableFund - item.price < 0) {
+        alert('Insufficient Fund')
+      } else {
+
+        if(!this.dispensing) {
+
+          this.dispensing = true;
+          setTimeout(() => {
+            this.dispensing = false;
+          }, 1500);
+          this.UpdateDomforIcon(item.icon,'hide',true, item.quantity);
+          item.quantity--;
+          this.totalAvailableFund = this.totalAvailableFund - item.price;
+
+        }
+       
+        
+      }
+    }
+
+  }
+
+  onAuthorise() {
+    if(this.balanceCardAmountstr==='') {
+      alert('please add amount first');
+    } else {
+      this.authorising = true;
+      setTimeout(() => {
+        this.authorising = false;
+  
+        this.approved = true;
+        setTimeout(() => {
+          this.approved = false;
+        }, 2000);
+  
+        this.totalAvailableFund = this.totalAvailableFund + parseFloat(this.balanceCardAmountstr);
+  
+      }, 2000);
+    }
+   
+
+
+
+  }
+
+  onHoverProduct(event, item) {
+    this.itemPrice = item.price;
+    this.itemSize = item.size;
+  }
+
+  onPaymentModeSelection(mode) {
+    this.paymentSelected = true;
+    if (mode === 'cash') {
+      this.cashPayment = true;
+      this.cardPayment = false;
+
+    } else {
+      this.cashPayment = false;
+      this.cardPayment = true;
+
+    }
+  }
+
+  onComplete() {
+    if (this.cashPayment) {
+      this.returnFundCash = true;
+      setTimeout(() => {
+        this.returnFundCash = false;
+        this.totalAvailableFund = 0;
+        this.resetAllValues();
+      }, 2000);
+    } else {
+      this.returnFundCard = true;
+      setTimeout(() => {
+        this.returnFundCard = false;
+        this.totalAvailableFund = 0;
+        this.resetAllValues();
+      }, 2000);
+    }
+
+
+
+
+  }
+
+  resetAllValues() {
+    this.balanceAmount = 0;
+    this.balanceCardAmountstr = "";
+    this.paymentSelected = true;
+    this.cashPayment = false;
+    this.cardPayment = false;
+    this.showVendingMc = false;
+
+  }
+
+  UpdateDomforIcon(iconclass, setclass: string, value: boolean, count) {
+
+    const elementClass = iconclass.replace('.jpeg', '');
+    const styleClass = setclass;
+    const styleStartNormal = document.getElementsByClassName(
+      elementClass
+    ) as HTMLCollectionOf<HTMLElement>;
+    styleStartNormal[count-1].classList.add(styleClass);
+  }
 
 
 }
