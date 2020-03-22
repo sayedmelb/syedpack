@@ -4,14 +4,14 @@
             "id": 1,
             "name": "Coke",
             "price": 1.25,
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 5,
             "icon": "coke.jpeg"
           }, {
             "id": 2,
             "name": "Diet Coke",
             "price": "1.35",
-            "size": "12oz",
+            "size": "250ml",
             "quantity": 8,
             "icon": "diet.jpeg"
           },
@@ -19,7 +19,7 @@
             "id": 3,
             "name": "Fanta",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 12,
             "icon": "fanta.jpeg"
           },
@@ -27,7 +27,7 @@
             "id": 4,
             "name": "Pepsi",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 8,
             "icon": "pepsi.jpeg"
           }
@@ -39,14 +39,14 @@
             "id": 1,
             "name": "Coke",
             "price": 1.25,
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 8,
             "icon": "coke.jpeg"
           }, {
             "id": 2,
             "name": "Diet Coke",
             "price": "1.35",
-            "size": "12oz",
+            "size": "250ml",
             "quantity": 8,
             "icon": "diet.jpeg"
           },
@@ -54,7 +54,7 @@
             "id": 3,
             "name": "Fanta",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 5,
             "icon": "fanta.jpeg"
           },
@@ -62,7 +62,7 @@
             "id": 2,
             "name": "Pepsi",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 10,
             "icon": "pepsi.jpeg"
           }
@@ -73,13 +73,13 @@
             "id": 1,
             "name": "Coke",
             "price": 1.25,
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 4
           }, {
             "id": 2,
             "name": "Diet Coke",
             "price": "1.25",
-            "size": "12oz",
+            "size": "250ml",
             "quantity": 4,
             "icon": "diet.jpeg"
           },
@@ -87,7 +87,7 @@
             "id": 2,
             "name": "Fanta",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 3,
             "icon": "fanta.jpeg"
           },
@@ -95,7 +95,7 @@
             "id": 2,
             "name": "Pepsi",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 5,
             "icon": "pepsi.jpeg"
           }
@@ -106,14 +106,14 @@
             "id": 1,
             "name": "Coke",
             "price": 1.25,
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 20,
             "icon": "coke.jpeg"
           }, {
             "id": 2,
             "name": "Diet Coke",
             "price": "1.25",
-            "size": "12oz",
+            "size": "250ml",
             "quantity": 8,
             "icon": "diet.jpeg"
           },
@@ -121,7 +121,7 @@
             "id": 3,
             "name": "Fanta",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 17,
             "icon": "fanta.jpeg"
           },
@@ -129,7 +129,7 @@
             "id": 4,
             "name": "Pepsi",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 8,
             "icon": "pepsi.jpeg"
           }
@@ -140,14 +140,14 @@
             "id": 1,
             "name": "Coke",
             "price": 1.25,
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 20,
             "icon": "coke.jpeg"
           }, {
             "id": 2,
             "name": "Diet Coke",
             "price": "1.25",
-            "size": "12oz",
+            "size": "250ml",
             "quantity": 20,
             "icon": "diet.jpeg"
           },
@@ -155,7 +155,7 @@
             "id": 3,
             "name": "Fanta",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 17,
             "icon": "fanta.jpeg"
           },
@@ -163,7 +163,7 @@
             "id": 4,
             "name": "Pepsi",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 17,
             "icon": "pepsi.jpeg"
           }
@@ -174,14 +174,14 @@
             "id": 1,
             "name": "Coke",
             "price": 1.25,
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 20,
             "icon": "coke.jpeg"
           }, {
             "id": 2,
             "name": "Diet Coke",
             "price": "1.25",
-            "size": "12oz",
+            "size": "250ml",
             "quantity": 20,
             "icon": "diet.jpeg"
           },
@@ -189,7 +189,7 @@
             "id": 3,
             "name": "Fanta",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 17,
             "icon": "fanta.jpeg"
           },
@@ -197,7 +197,7 @@
             "id": 4,
             "name": "Pepsi",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 17,
             "icon": "pepsi.jpeg"
           }
@@ -208,14 +208,14 @@
             "id": 1,
             "name": "Coke",
             "price": 1.25,
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 20,
             "icon": "coke.jpeg"
           }, {
             "id": 2,
             "name": "Diet Coke",
             "price": "1.25",
-            "size": "12oz",
+            "size": "250ml",
             "quantity": 20,
             "icon": "diet.jpeg"
           },
@@ -223,7 +223,7 @@
             "id": 3,
             "name": "Fanta",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 17,
             "icon": "fanta.jpeg"
           },
@@ -231,7 +231,7 @@
             "id": 4,
             "name": "Pepsi",
             "price": "1.45",
-            "size": "12oz",
+            "size": "375ml",
             "quantity": 17,
             "icon": "pepsi.jpeg"
           }

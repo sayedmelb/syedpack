@@ -187,7 +187,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   OnNavBarClicked(event) {
-    //alert(event);
     console.log(event);
     if (event.state == 'home') {
       this.navtoggle = 'home';
@@ -263,7 +262,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       alert('Stock for this item is no more available in this machine Sorry');
     } else {
       if (this.totalAvailableFund - item.price < 0) {
-        alert('Insufficient Fund')
+        alert('Insufficient Fund ')
       } else {
 
         if(!this.dispensing) {
