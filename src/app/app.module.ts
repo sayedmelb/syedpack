@@ -8,14 +8,14 @@ import { AppSettingsService } from './service/app.settings.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NavBar } from './navbar/nav-bar';
 import { NavFooter } from './navfooter/nav-footer';
-import { CattleListing } from './cattle-listing/cattle-listing';
+import { MachineListing } from './machine-listing/machine-listing';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBar,
     NavFooter,
-    CattleListing
+    MachineListing
     
   ],
   imports: [

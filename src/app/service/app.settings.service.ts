@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { CattleData } from '../model/cattle.data';
+import { MachineData } from '../model/machine.data';
 
 @Injectable({
   
@@ -18,7 +18,7 @@ import { CattleData } from '../model/cattle.data';
           });
       }
   
-      public getJSON(): Observable<CattleData[]> {
-          return this.http.get<CattleData[]>(this.url);
+      public getJSON(): Observable<MachineData[]> {
+          return this.http.get<MachineData[]>(this.url);
       }
   }

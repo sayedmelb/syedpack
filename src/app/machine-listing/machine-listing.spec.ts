@@ -1,5 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
-import { CattleListing } from './cattle-listing';
+import { CattleListing } from './machine-listing';
 
 describe('CattleListing', () => {
   beforeEach(async(() => {

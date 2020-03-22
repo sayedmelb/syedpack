@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Injectable, AfterViewInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { CattleData } from './model/cattle.data';
+import { MachineData } from './model/machine.data';
 import * as _ from 'lodash';
 import { NguiMapComponent } from '@ngui/map';
 import { AppSettingsService } from './service/app.settings.service';

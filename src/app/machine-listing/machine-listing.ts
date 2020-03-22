@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild, Injectable, Output, EventEmitter, Input }
 
 
 @Component({
-  selector: 'cattle-listing',
-  templateUrl: './cattle-listing.html',
-  styleUrls: ['./cattle-listing.scss'],
+  selector: 'machine-listing',
+  templateUrl: './machine-listing.html',
+  styleUrls: ['./machine-listing.scss'],
  
 })
-export class CattleListing implements OnInit {
+export class MachineListing implements OnInit {
  @Input("listing") listing: any;
   
 
